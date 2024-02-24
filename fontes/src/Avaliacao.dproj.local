@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/08/31 05:57:38.000.758,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/09/05 18:22:32.000.819,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/09/11 16:34:55.000.475,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/21 16:40:55.000.196,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/21 22:53:02.000.780,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/24 12:17:05.507,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/24 12:20:02.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.pas=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/24 12:20:02.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.dfm=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/02/24 12:20:10.828,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Avaliacao.dproj=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="JNYPA6ZPCIIVQS9D" Android64="JNYPA6ZPCIIVQS9D"/>
+	</ActiveMobileDevice>
+</BorlandProject>
