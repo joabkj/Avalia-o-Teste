@@ -1,0 +1,407 @@
+unit u_cadBasico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Mask, Vcl.DBCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls, System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.Menus, Data.DB,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.Actions, Vcl.ActnList, Vcl.Grids, Vcl.DBGrids, Controller.Connection,
+   FireDAC.Phys.FBDef, FireDAC.Phys, FireDAC.Phys.IBBase,
+  FireDAC.Phys.FB, System.UItypes;
+
+type
+  TcadBasico = class(TForm)
+    MainMenu1: TMainMenu;
+    menu_cadastro: TMenuItem;
+    NovoF21: TMenuItem;
+    AlterarF31: TMenuItem;
+    ExcluirDEL1: TMenuItem;
+    Imprimir1: TMenuItem;
+    Sair1: TMenuItem;
+    pnl_top: TPanel;
+    lbl_descr: TLabel;
+    img_geral: TImageList;
+    pnl_botoes: TPanel;
+    btn_novo: TButton;
+    btn_excluir: TButton;
+    btn_alterar: TButton;
+    btn_cancelar: TButton;
+    btn_SalvarNovo: TButton;
+    pg_principal: TPageControl;
+    tb_consulta: TTabSheet;
+    pnl_consulta: TPanel;
+    Label5: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    edt_consulta: TEdit;
+    cb_consulta: TComboBox;
+    cb_tipo: TComboBox;
+    cb_order: TComboBox;
+    btn_pesquisar: TButton;
+    tb_dados: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    db_codigo: TDBEdit;
+    db_nome: TDBEdit;
+    gdr_principal: TDBGrid;
+    btn_imprimir: TButton;
+    btn_SalvarSair: TButton;
+    ac_comandos: TActionList;
+    ac_novo: TAction;
+    ac_alterar: TAction;
+    ac_Excluir: TAction;
+    ac_Cancelar: TAction;
+    ac_SalvarSair: TAction;
+    ac_SalvarNovo: TAction;
+    ac_imprimir: TAction;
+    ac_sair: TAction;
+    ds_dados: TDataSource;
+    dados: TFDMemTable;
+    procedure ac_novoExecute(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ac_CancelarExecute(Sender: TObject);
+    procedure ac_SalvarSairExecute(Sender: TObject);
+    procedure ac_alterarExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure ac_ExcluirExecute(Sender: TObject);
+    procedure ac_SalvarNovoExecute(Sender: TObject);
+    procedure btn_pesquisarClick(Sender: TObject);
+    procedure componente_foco; virtual;
+    procedure DeletaRegistrosTabelasSecundarias;virtual;
+    procedure SalvaTabelasSecundarias;virtual;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    function valida: Boolean; virtual; abstract;
+    function pesq_complementar: string; virtual; abstract;
+  private
+    { Private declarations }
+    wp_tabela, wp_OrdeBy, wp_id: String;
+    FTAbela: String;
+    FOrder : String;
+    FID    : String;
+
+
+
+    procedure ConfiguraFormulario;
+    procedure acao_botoes_novo;
+    procedure acao_botoes_sair;
+    procedure AbrirTabela;
+  public
+    { Public declarations }
+    property  TABELA  : String read FTabela write FIDUsuario;
+    property  ORDER   : String read FOrder write FOrder;
+    property  ID      : String read FID write FID;
+  end;
+
+var
+  cadBasico: TcadBasico;
+  wp_usuario : integer;
+  wp_classe  : string;
+
+implementation
+  uses u_dicionarioDados, u_funcoes;
+
+{$R *.dfm}
+
+procedure TcadBasico.AbrirTabela;
+begin
+  if not qy_dados.Active then
+  begin
+    qy_Dados.Close;
+    qy_Dados.SQL.Clear;
+    qy_Dados.SQL.Add('SELECT * FROM '+ wp_tabela);
+    qy_Dados.open;
+  end;
+end;
+
+procedure TcadBasico.acao_botoes_novo;
+begin
+  pg_principal.ActivePageIndex:= 1;
+  menu_cadastro.Enabled := false;
+  btn_novo.Visible      := false;
+  btn_excluir.Visible   := false;
+  btn_alterar.Visible   := false;
+  btn_imprimir.Visible  := false;
+  btn_cancelar.Visible  := true;
+  btn_SalvarNovo.Visible:= true;
+  btn_SalvarSair.Visible:= true;
+end;
+
+procedure TcadBasico.acao_botoes_sair;
+begin
+  pg_principal.ActivePageIndex:= 0;
+  menu_cadastro.Enabled := true;
+  btn_novo.Visible      := True;
+  btn_excluir.Visible   := True;
+  btn_alterar.Visible   := True;
+  btn_imprimir.Visible  := True;
+  btn_cancelar.Visible  := False;
+  btn_SalvarNovo.Visible:= False;
+  btn_SalvarSair.Visible:= False;
+end;
+
+procedure TcadBasico.ac_alterarExecute(Sender: TObject);
+begin
+  if btn_alterar.Visible then
+  begin
+    qy_dados.Edit;
+    acao_botoes_novo;
+    componente_foco;
+  end;
+end;
+
+procedure TcadBasico.ac_CancelarExecute(Sender: TObject);
+begin
+  if btn_cancelar.Visible then
+  begin
+    acao_botoes_sair;
+    qy_dados.Cancel;
+    edt_consulta.SetFocus;
+  end
+  else
+    Showmessage('Ação não permitida.');
+end;
+
+procedure TcadBasico.ac_ExcluirExecute(Sender: TObject);
+begin
+  if btn_excluir.Visible then
+  begin
+    if not qy_dados.IsEmpty then
+    begin
+      if messagedlg('Deseja excluir este registro?', mtconfirmation,[mbyes,mbno],0)= idyes then
+      begin
+        try
+          DeletaRegistrosTabelasSecundarias;
+          qy_dados.Delete;
+        except
+          Showmessage('Erro ao excluir o registro. Provalvelmente existe tabelas com registros relacionados.');
+        end;
+      end;
+    end
+    else
+      begin
+        Showmessage('Não existe registro para ser excluido.');
+        exit;
+      end;
+  end;
+end;
+
+procedure TcadBasico.ac_novoExecute(Sender: TObject);
+begin
+  AbrirTabela;
+  if btn_novo.Visible = True then
+  begin
+    acao_botoes_novo;
+    qy_dados.Insert;
+    acao_botoes_novo;
+    componente_foco;
+  end
+  else
+      Showmessage('Você já estar incluindo um registro.');
+end;
+
+procedure TcadBasico.ac_SalvarNovoExecute(Sender: TObject);
+begin
+  if btn_SalvarNovo.Visible then
+  begin
+    if valida then
+    begin
+      pg_principal.ActivePageIndex:= 1;
+      qy_dados.Post;
+      SalvaTabelasSecundarias;
+      qy_dados.Append;
+      componente_foco;
+    end;
+  end
+  else
+    Showmessage('Ação não permitida.');
+end;
+
+procedure TcadBasico.ac_SalvarSairExecute(Sender: TObject);
+begin
+  if btn_salvarSair.Visible then
+  begin
+    if valida then
+      begin
+        qy_dados.Post;
+        SalvaTabelasSecundarias;
+        acao_botoes_sair;
+        edt_consulta.SetFocus;
+      end;
+  end
+  else
+    Showmessage('Ação não permitida.');
+end;
+
+procedure TcadBasico.btn_pesquisarClick(Sender: TObject);
+var
+  wl_tipo: String;
+  wl_cond1, wl_cond2: String;
+  wl_campoDescr: String;
+  wl_order: String;
+begin
+  wl_tipo := '';
+  wl_order:= '';
+
+  if cb_tipo.ItemIndex = 0 then wl_campoDescr:= wp_OrdeBy;
+  if cb_tipo.ItemIndex = 1 then wl_campoDescr:= wp_id;
+
+  if cb_order.ItemIndex = 0 then
+  begin
+    wl_order:= ' ORDER BY '+ wl_campoDescr + ' ASC ';
+  end
+  else
+  begin
+      wl_order:= ' ORDER BY '+ wl_campoDescr + ' DESC ';
+  end;
+
+  if trim(edt_consulta.Text) = '' then
+  begin
+    try
+      qy_Dados.Close;
+      qy_Dados.SQL.Clear;
+      qy_Dados.SQL.Add('SELECT * FROM '+ wp_tabela +' where '+wp_id +' = '+wp_id+ pesq_complementar+ wl_order);
+      qy_Dados.open;
+
+      if not qy_Dados.IsEmpty then
+        gdr_principal.SetFocus;
+    except
+      Showmessage('Erro ao consultar a tabela no banco de dados.');
+    end;
+    exit;
+  end
+  else if cb_tipo.ItemIndex = 1 then
+  begin
+    try
+      StrToInt(edt_consulta.Text);
+    except
+      Showmessage('Permitido apenas numeros.');
+      edt_consulta.clear;
+      edt_consulta.setfocus;
+      exit;
+    end;
+  end
+  else
+  begin
+    if cb_tipo.ItemIndex = 0 then
+    begin
+    if cb_consulta.ItemIndex = 0 then
+    begin
+      wl_cond1:= ' = ';
+      wl_cond2:= ' ';
+    end
+    else if cb_consulta.ItemIndex = 1 then
+    begin
+      wl_cond1:= ' <> ';
+      wl_cond2:= ' ';
+    end
+    else if cb_consulta.ItemIndex = 2 then
+    begin
+      wl_cond1:='';
+      wl_cond2:='%';
+    end
+    else if cb_consulta.ItemIndex = 3 then
+    begin
+      wl_cond1:='%';
+      wl_cond2:='';
+    end
+    else if cb_consulta.ItemIndex = 4 then
+    begin
+      wl_cond1:='%';
+      wl_cond2:='%';
+    end;
+
+    if (cb_consulta.ItemIndex = 0) or (cb_consulta.ItemIndex = 1) then
+      wl_tipo:= ' WHERE '+ wl_campoDescr + wl_cond1 + QuotedStr(edt_consulta.Text)
+    else
+      wl_tipo:= ' WHERE '+ wl_campoDescr +' LIKE ' + QuotedStr(wl_cond1 + edt_consulta.Text + wl_cond2);
+    end
+    else
+    begin
+      wl_tipo:= ' WHERE '+ wl_campoDescr + ' = ' + QuotedStr(edt_consulta.Text);
+    end;
+    try
+      qy_Dados.Close;
+      qy_Dados.SQL.Clear;
+      qy_Dados.SQL.Add('SELECT * FROM '+ wp_tabela + wl_tipo + pesq_complementar+ wl_order);
+      qy_Dados.open;
+      if not qy_Dados.IsEmpty then
+      gdr_principal.SetFocus;
+    except
+      Showmessage('Erro ao consultar a tabela no banco de dados.');
+    end;
+  end;
+end;
+
+procedure TcadBasico.componente_foco;
+begin
+  db_nome.SetFocus;
+end;
+
+procedure TcadBasico.ConfiguraFormulario;
+var
+  wl_Dados: TResultArray;
+begin
+  wl_Dados := DadosFormulario(tag);
+  wp_tabela:= wl_Dados[1];
+  wp_OrdeBy:= wl_Dados[2];
+  wp_id    := wl_Dados[3];
+  wp_query_aberta  := wl_Dados[4];
+  lbl_descr.Caption:= wl_Dados[5];
+end;
+
+procedure TcadBasico.DeletaRegistrosTabelasSecundarias;
+begin
+//
+end;
+
+procedure TcadBasico.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action:= cafree;
+end;
+
+procedure TcadBasico.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  if qy_dados.State in [dsinsert, dsEdit] then
+    qy_dados.Cancel;
+
+  qy_dados.Active:= false;
+end;
+
+procedure TcadBasico.FormCreate(Sender: TObject);
+begin
+  pg_principal.ActivePageIndex:= 0;
+  ConfiguraFormulario;
+  qy_dados.Connection:= TConnection.GetInstance.Conexao;
+end;
+
+procedure TcadBasico.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    Key := #0;
+    selectnext(activecontrol,true,true);
+  end;
+end;
+
+procedure TcadBasico.FormShow(Sender: TObject);
+begin
+  if wp_query_aberta = 'true' then
+    AbrirTabela;
+  caption:= 'Modulo de Cadastro';
+
+end;
+
+procedure TcadBasico.SalvaTabelasSecundarias;
+begin
+//
+end;
+
+end.
