@@ -1,0 +1,61 @@
+unit u_admPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
+  System.Actions, Vcl.ActnList, Vcl.Menus,
+
+  Controller.Usuario;
+
+type
+  TadmPrincipal = class(TForm)
+    MainMenu1: TMainMenu;
+    Cadastros1: TMenuItem;
+    Postos1: TMenuItem;
+    N1: TMenuItem;
+    Combustiveis1: TMenuItem;
+    Movimentao1: TMenuItem;
+    Abastecimento1: TMenuItem;
+    Relatrios1: TMenuItem;
+    Geralporperodo1: TMenuItem;
+    Sobre1: TMenuItem;
+    Verso101: TMenuItem;
+    ac_formularios: TActionList;
+    ac_clientes: TAction;
+    ac_produtos: TAction;
+    ac_pedidos: TAction;
+    ac_gerar_banco: TAction;
+    Action1: TAction;
+    tm_DataHora: TTimer;
+    StatusBar1: TStatusBar;
+    procedure FormShow(Sender: TObject);
+    procedure tm_DataHoraTimer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    IDUsuario  : Integer;
+    NomeUsuario: String;
+  end;
+
+var
+  admPrincipal: TadmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TadmPrincipal.FormShow(Sender: TObject);
+begin
+   Statusbar1.Panels [4].Text := 'Usuário: '+ TControllerUsuario.NomeUsuario;
+end;
+
+procedure TadmPrincipal.tm_DataHoraTimer(Sender: TObject);
+begin
+  Statusbar1.Panels [1].Text := ' '+FormatDateTime ('dddd","dd" de "mmmm" de "yyyy',now);// para data
+  statusbar1.Panels [3].Text := ' '+FormatDateTime ('hh:mm:ss',now);//para hora
+end;
+
+end.
