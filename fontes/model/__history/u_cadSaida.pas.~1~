@@ -1,0 +1,27 @@
+unit u_cadSaida;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ucad_Entrada, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls;
+
+type
+  Tcad_saida = class(Tcad_entrada)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  cad_saida: Tcad_saida;
+
+implementation
+
+{$R *.dfm}
+
+end.
