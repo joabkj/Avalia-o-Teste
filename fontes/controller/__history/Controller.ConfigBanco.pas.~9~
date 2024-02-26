@@ -1,0 +1,84 @@
+unit Controller.ConfigBanco;
+
+interface
+
+uses
+  System.IniFiles, System.SysUtils, FireDAC.Comp.Client, System.Types, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Phys, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.VCLUI.Wait, FireDAC.Phys.PGDef, FireDAC.Phys.PG,
+  FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet, System.Classes, System.IOUtils,
+  Utils.Criptografia;
+
+type
+  TServerConfig = class
+  private
+    FDManager: TFDManager;
+    procedure ConfigDB(Driver: String);
+    class var FInstance: TServerConfig;
+  public
+    class function GetInstance(Asenha, ABanco, Driver: String; ACriandoBanco: Boolean): TServerConfig;
+  end;
+
+  var
+    FBanco: String;
+    FSenha: String;
+
+implementation
+
+uses
+  Vcl.Dialogs;
+
+
+{ TServer }
+
+class function TServerConfig.GetInstance(Asenha, ABanco, Driver: String; ACriandoBanco: Boolean): TServerConfig;
+begin
+  if ACriandoBanco then
+    FBanco:= 'localhost'
+  else
+    FBanco:= ABanco;
+  FSenha:= ASenha;
+  if FInstance = nil then
+  begin
+    FInstance := TServerConfig.Create;
+    FInstance.ConfigDB(Driver);
+  end;
+  Result := FInstance;
+end;
+
+procedure TServerConfig.ConfigDB(Driver: String);
+var
+  IniFile : TIniFile;
+  Params  : TStrings;
+  Port    : Integer;
+  Database: string;
+  Server  : string;
+  UserName: string;
+  Password: string;
+  LPath   : string;
+begin
+  if Driver = 'PG'  then
+  begin
+    LPath               := GetCurrentDir()+'\ConfigServer.Ini';
+    FInstance.FDManager := TFDManager.Create(nil);
+    IniFile             := TIniFile.Create(LPath);
+    DataBase            := IniFile.ReadString('Config', 'Database', FBanco);
+    Server              := IniFile.ReadString('Config', 'Server', 'localhost');
+    UserName            := IniFile.ReadString('Config', 'UserName', 'postgres');
+    Password            := IniFile.ReadString('Config', 'Password', FSenha);//TCriptografia.Descriptografar(IniFile.ReadString('Config', 'Password', ''));
+    Port                := StrToInt(IniFile.ReadString('Cfg', 'Port', '5432'));
+    Params              := TStringList.Create;
+    Params.AddPair('DriverID', 'PG');
+    Params.AddPair('Server', Server);
+    Params.AddPair('Database', DataBase);
+    Params.AddPair('User_Name', UserName);
+    Params.AddPair('Password', Password);
+    Params.AddPair('Port', Port.ToString);
+    Params.AddPair('Pooled', 'True');
+    FInstance.FDManager.AddConnectionDef('JKServer', 'PG', Params);
+    FInstance.FDManager.Active := True;
+  end;
+
+end;
+
+end.
