@@ -2,8 +2,8 @@ object admPrincipal: TadmPrincipal
   Left = 0
   Top = 0
   Caption = 'Avalia'#231#227'o Teste / Khipo'
-  ClientHeight = 585
-  ClientWidth = 1124
+  ClientHeight = 584
+  ClientWidth = 1120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,11 +11,14 @@ object admPrincipal: TadmPrincipal
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
+  Position = poDesktopCenter
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 562
-    Width = 1124
+    Top = 561
+    Width = 1120
     Height = 23
     Panels = <
       item
@@ -44,9 +47,8 @@ object admPrincipal: TadmPrincipal
         Text = 'Banco de dados: POSTO'
         Width = 50
       end>
-    ExplicitLeft = -24
-    ExplicitTop = 355
-    ExplicitWidth = 628
+    ExplicitTop = 560
+    ExplicitWidth = 1116
   end
   object MainMenu1: TMainMenu
     Left = 576
@@ -54,26 +56,20 @@ object admPrincipal: TadmPrincipal
     object Cadastros1: TMenuItem
       Caption = 'Cadastros'
       object Postos1: TMenuItem
-        Action = ac_clientes
+        Action = ac_produtos
       end
       object N1: TMenuItem
         Caption = '-'
       end
-      object Combustiveis1: TMenuItem
-        Action = ac_produtos
+      object Categorias1: TMenuItem
+        Action = asc_categorias
       end
     end
     object Movimentao1: TMenuItem
       Caption = 'Movimenta'#231#227'o'
-      object Abastecimento1: TMenuItem
-        Action = ac_pedidos
-      end
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios '
-      object Geralporperodo1: TMenuItem
-        Caption = 'Abastecimento por per'#237'odo'
-      end
     end
     object Sobre1: TMenuItem
       Caption = 'Sobre'
@@ -85,26 +81,17 @@ object admPrincipal: TadmPrincipal
   object ac_formularios: TActionList
     Left = 576
     Top = 104
-    object ac_clientes: TAction
-      Caption = 'Clientes'
-      Enabled = False
-    end
     object ac_produtos: TAction
       Caption = 'Produtos'
-      Enabled = False
+      OnExecute = ac_produtosExecute
     end
-    object ac_pedidos: TAction
-      Caption = 'Pedidos'
-      Enabled = False
-    end
-    object ac_gerar_banco: TAction
-      Caption = 'Antes de come'#231'a clique aqui para gerar o Banco de Dados'
-    end
-    object Action1: TAction
-      Caption = 'Action1'
+    object asc_categorias: TAction
+      Caption = 'Categorias'
+      OnExecute = asc_categoriasExecute
     end
   end
   object tm_DataHora: TTimer
+    OnTimer = tm_DataHoraTimer
     Left = 576
     Top = 160
   end
