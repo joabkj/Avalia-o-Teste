@@ -1,0 +1,68 @@
+unit Controller.Usuario;
+
+interface
+
+uses
+  System.SysUtils, StdCtrls, Data.DB,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, Web.HTTPApp,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Utils.Funcoes, Server.ControllerBaseClass, System.Rtti, System.Classes, System.JSON,
+  System.Generics.Collections;
+
+ type
+    TControllerUsuario = class(TControllerBaseClass)
+ private
+public
+    constructor Create;
+    destructor Destroy; override;
+    function   ValidaUsuario(Response: TWebResponse; AParams: TDictionary<string, string>; var AIdUsuario: String; var NameUser: String; var AidEmpresa: String; var ANomeEmpresa: String): Boolean; override;
+end;
+
+  var
+    dsUsuarios  : TDataSource;
+
+implementation
+
+{ TUsuarios }
+
+constructor TControllerUsuario.Create;
+begin
+  inherited;
+end;
+
+destructor TControllerUsuario.Destroy;
+begin
+   inherited;
+end;
+
+
+function TControllerUsuario.ValidaUsuario(Response: TWebResponse; AParams: TDictionary<string, string>; var AIdUsuario: String; var NameUser: String; var AidEmpresa: String; var ANomeEmpresa: String): Boolean;
+var
+ _Sql: String;
+ _Usuario: String;
+ _Senha  : String;
+begin
+  result:= false;
+
+  _Usuario := AParams.Items['user'];
+  _Senha   := AParams.Items['password'];
+
+  if (_Usuario = '''JOAB''') and (_Senha = '''TESTE''') then
+  begin
+    AIdUsuario  := '1001';
+    NameUser    := 'USUARIO';
+    AidEmpresa  := '0';
+    ANomeEmpresa:= 'DESBRAVADOR';
+    result      := true;
+    exit;
+  end;
+
+end;
+
+initialization
+
+  RegisterClass(TControllerUsuario);
+
+end.
+
