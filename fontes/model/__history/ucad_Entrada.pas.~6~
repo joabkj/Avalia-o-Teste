@@ -1,0 +1,73 @@
+unit ucad_Entrada;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+
+  Controller.Connection;
+
+type
+  Tcad_entrada = class(TForm)
+    lbl_produto: TLabel;
+    Edit1: TEdit;
+    Quantidade: TLabel;
+    btn_cadastrar: TButton;
+    dados: TFDQuery;
+    procedure FormShow(Sender: TObject);
+    procedure btn_cadastrarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    class function inicializa(AIDProduto: Integer; ADescricao: String): boolean; virtual;
+  end;
+
+var
+  cad_entrada: Tcad_entrada;
+  Fid_produto: Integer;
+  FDescricao : String;
+
+implementation
+
+{$R *.dfm}
+
+{ Tcad_entrada }
+
+procedure Tcad_entrada.btn_cadastrarClick(Sender: TObject);
+begin
+  dados.Connection:= TConnection.GetInstance.Conexao;
+end;
+
+procedure Tcad_entrada.FormShow(Sender: TObject);
+begin
+  lbl_produto.Caption:= FDescricao;
+end;
+
+class function Tcad_entrada.inicializa(AIDProduto: Integer; ADescricao: String): boolean;
+var
+  FrmClass : TFormClass;
+  Frm      : TForm;
+  wl_tag: integer;
+begin
+  Fid_produto:=  AIDProduto;
+  FDescricao := ADescricao;
+  try
+    FrmClass   := TFormClass(FindClass('Tcad_entrada'));
+    Frm        := FrmClass.Create(Application);
+    wl_tag     := Frm.Tag;
+    Frm.ShowModal;
+  finally
+    result:= true;
+  end;
+
+end;
+
+initialization
+    RegisterClass(Tcad_entrada);
+
+end.
