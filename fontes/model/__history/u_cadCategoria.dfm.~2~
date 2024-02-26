@@ -1,0 +1,69 @@
+inherited cadCategoria: TcadCategoria
+  Tag = 2
+  Caption = 'cadCategoria'
+  ExplicitWidth = 700
+  ExplicitHeight = 526
+  TextHeight = 13
+  inherited pnl_top: TPanel
+    ExplicitWidth = 684
+  end
+  inherited pnl_botoes: TPanel
+    ExplicitWidth = 684
+    inherited btn_cancelar: TButton
+      Left = -8
+      ExplicitLeft = -8
+    end
+    inherited btn_SalvarNovo: TButton
+      Left = 96
+      ExplicitLeft = 96
+    end
+    inherited btn_SalvarSair: TButton
+      Left = 249
+      ExplicitLeft = 249
+    end
+  end
+  inherited pg_principal: TPageControl
+    ActivePage = tb_consulta
+    ExplicitWidth = 684
+    ExplicitHeight = 411
+    inherited tb_consulta: TTabSheet
+      inherited pnl_consulta: TPanel
+        ExplicitWidth = 676
+      end
+      inherited gdr_principal: TDBGrid
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'id_categoria'
+            Title.Caption = 'ID'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nome'
+            Title.Caption = 'Descri'#231#227'o'
+            Width = 400
+            Visible = True
+          end>
+      end
+    end
+    inherited tb_dados: TTabSheet
+      inherited db_codigo: TDBEdit
+        DataField = 'id_categoria'
+        DataSource = ds_dados
+      end
+    end
+  end
+  inherited qy_dados: TFDQuery
+    Tag = 2
+    object qy_dadosid_categoria: TIntegerField
+      FieldName = 'id_categoria'
+      DisplayFormat = '0000'
+      EditFormat = '0000'
+    end
+    object qy_dadosnome: TStringField
+      FieldName = 'nome'
+      Size = 100
+    end
+  end
+end
