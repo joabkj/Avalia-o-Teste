@@ -6,10 +6,35 @@
     <Transaction>2023/09/11 16:34:55.000.475,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/02/21 16:40:55.000.196,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/02/21 22:53:02.000.780,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/02/24 12:17:05.507,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/02/24 12:20:02.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.pas=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/02/24 12:20:02.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.dfm=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2024/02/24 12:20:10.828,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Avaliacao.dproj=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/02/24 12:17:05.000.507,=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/24 12:20:02.000.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.dfm=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/02/24 12:20:02.000.221,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_admPrincipal.pas=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/24 12:20:10.000.828,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Avaliacao.dproj=C:\Users\MAIA\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/02/24 12:21:49.000.604,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_basAcessoSistema.pas</Transaction>
+    <Transaction>2024/02/25 01:09:38.000.414,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\controller\Controller.ConfigBanco.pas</Transaction>
+    <Transaction>2024/02/25 01:14:14.000.016,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\controller\Controller.Connection.pas</Transaction>
+    <Transaction>2024/02/25 10:12:55.855,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\classes\Utils.Criptografia.pas</Transaction>
+    <Transaction>2024/02/25 10:57:47.088,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\controller\Controller.Usuario.pas</Transaction>
+    <Transaction>2024/02/25 12:39:18.811,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadBasico.pas</Transaction>
+    <Transaction>2024/02/25 12:40:02.162,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\classes\u_dicionarioDados.pas</Transaction>
+    <Transaction>2024/02/25 13:54:59.442,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\classes\u_funcoes.pas</Transaction>
+    <Transaction>2024/02/25 13:56:08.638,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 13:56:48.703,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucadProdutos.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.dfm</Transaction>
+    <Transaction>2024/02/25 13:56:48.703,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucadProdutos.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 14:35:50.066,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 14:37:24.672,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadCategoria.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.dfm</Transaction>
+    <Transaction>2024/02/25 14:37:24.672,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadCategoria.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 15:40:33.173,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 15:44:51.966,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucad_Entrada.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 15:44:51.966,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucad_Entrada.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.dfm</Transaction>
+    <Transaction>2024/02/25 16:20:04.275,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 16:21:20.606,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadSaida.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.dfm</Transaction>
+    <Transaction>2024/02/25 16:21:20.606,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadSaida.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 16:21:37.719,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadEntrada.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucad_Entrada.dfm</Transaction>
+    <Transaction>2024/02/25 16:21:37.719,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadEntrada.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\ucad_Entrada.pas</Transaction>
+    <Transaction>2024/02/25 16:27:58.996,=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
+    <Transaction>2024/02/25 16:33:57.138,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadHistorico.dfm=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.dfm</Transaction>
+    <Transaction>2024/02/25 16:33:57.138,E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\model\u_cadHistorico.pas=E:\Projetos\Git\Avaliação Testes\Avalia-o-Teste\fontes\src\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="JNYPA6ZPCIIVQS9D" Android64="JNYPA6ZPCIIVQS9D"/>
