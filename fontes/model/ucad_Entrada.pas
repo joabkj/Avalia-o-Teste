@@ -1,0 +1,97 @@
+unit ucad_Entrada;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+
+  Controller.Connection;
+
+type
+  Tcad_entrada = class(TForm)
+    lbl_produto: TLabel;
+    edt_Valor: TEdit;
+    Quantidade: TLabel;
+    btn_cadastrar: TButton;
+    dados: TFDQuery;
+    Label1: TLabel;
+    procedure FormShow(Sender: TObject);
+    procedure btn_cadastrarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edt_ValorKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    class function inicializa(AIDProduto: Integer; ADescricao, ANomeTabela: String): boolean; virtual;
+  end;
+
+var
+  cad_entrada: Tcad_entrada;
+  Fid_produto: Integer;
+  FDescricao : String;
+  FNomeTabela: String;
+
+implementation
+
+{$R *.dfm}
+
+{ Tcad_entrada }
+
+procedure Tcad_entrada.btn_cadastrarClick(Sender: TObject);
+begin
+  if StrToInt(edt_Valor.Text) > 0 then
+  begin
+    dados.sql.clear;
+    dados.sql.add('INSERT INTO '+FNomeTabela+' (id_produto, data, quantidade)  '+
+	              ' VALUES ('+InttoStr(Fid_produto)+','+ QuotedStr(FormatDateTime('yyyy/mm/dd', date))+','+edt_Valor.Text +') ');
+    dados.execSQL;
+    close;
+  end
+  else
+    Showmessage('Quantidade não pode ser igual a zero.');
+end;
+
+procedure Tcad_entrada.edt_ValorKeyPress(Sender: TObject; var Key: Char);
+begin
+ if not (CharInSet(Key,['0'..'9',#8])) or (Key = #13) then
+   key := #0;
+end;
+
+procedure Tcad_entrada.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+end;
+
+procedure Tcad_entrada.FormShow(Sender: TObject);
+begin
+  lbl_produto.Caption:= FDescricao;
+  dados.Connection:= TConnection.GetInstance.Conexao;
+end;
+
+class function Tcad_entrada.inicializa(AIDProduto: Integer; ADescricao, ANomeTabela: String): boolean;
+var
+  FrmClass : TFormClass;
+  Frm      : TForm;
+begin
+  Fid_produto:=  AIDProduto;
+  FDescricao := ADescricao;
+  FNomeTabela:= ANomeTabela;
+  try
+    FrmClass   := TFormClass(FindClass('Tcad_entrada'));
+    Frm        := FrmClass.Create(Application);
+    Frm.ShowModal;
+  finally
+    result:= true;
+  end;
+
+end;
+
+initialization
+    RegisterClass(Tcad_entrada);
+
+end.
